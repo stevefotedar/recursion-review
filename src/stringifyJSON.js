@@ -19,12 +19,13 @@ var stringifyJSON = function(obj) {
     result = '[' + strArr.join(',') + ']';
   } else if ( typeof obj === 'object' ) {
     var strObj = '';
+    
     for ( var key in obj ) {
-      if ( typeof obj[key] !== 'function' && obj[key]) {
-        strObj += stringifyJSON(key) + ':' + stringifyJSON(obj[key]);
+      if ( typeof obj[key] !== 'function' && obj[key] !== undefined ) {
+        strObj += stringifyJSON(key) + ':' + stringifyJSON(obj[key]) + ',';
       }
     }
-    result = '{' + strObj + '}';
+    result = '{' + strObj.slice(0,-1) + '}';
   }
   return result;
   // your code goes here
